@@ -1,8 +1,8 @@
-async-map-android
+delight-keyvalue-android
 =================
 
-An implementation for async-map based on the Android SQLite API.
+An implementation of a key value store based on the Android SQLite API.
 
-- [Dependencies](http://modules.appjangle.com/async-map-android/latest/dependencies.html)
-- [JavaDocs](http://modules.appjangle.com/async-map-android/latest/apidocs/index.html)
-- [Maven Reports](http://modules.appjangle.com/async-map-android/latest/project-reports.html)
+- [Dependencies](http://modules.appjangle.com/delight-keyvalue-android/latest/dependencies.html)
+- [JavaDocs](http://modules.appjangle.com/delight-keyvalue-android/latest/apidocs/index.html)
+- [Maven Reports](http://modules.appjangle.com/delight-keyvalue-android/latest/project-reports.html)
