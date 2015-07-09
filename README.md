@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/javadelight/delight-keyvalue-android.svg)](https://travis-ci.org/javadelight/delight-keyvalue-android)
+
 delight-keyvalue-android
 =================
 
