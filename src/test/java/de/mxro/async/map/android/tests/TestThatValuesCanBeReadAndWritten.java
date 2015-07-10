@@ -39,7 +39,7 @@ public class TestThatValuesCanBeReadAndWritten {
 
 			@Override
 			public void apply(ValueCallback<Success> callback) {
-				map.start(AsyncCommon.wrap(callback));
+				map.start(AsyncCommon.asSimpleCallback(callback));
 			}
 		});
 
@@ -59,7 +59,7 @@ public class TestThatValuesCanBeReadAndWritten {
 
 			@Override
 			public void apply(ValueCallback<Success> callback) {
-				map.stop(AsyncCommon.wrap(callback));
+				map.stop(AsyncCommon.asSimpleCallback(callback));
 				db.close();
 			}
 		});
