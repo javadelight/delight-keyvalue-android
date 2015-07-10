@@ -13,7 +13,7 @@ import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowSQLiteDatabase;
 
 import android.database.sqlite.SQLiteDatabase;
-import de.mxro.async.map.AsyncMap;
+import de.mxro.async.map.Store;
 import de.mxro.async.map.android.AsyncMapAndorid;
 import de.mxro.async.map.android.SQLiteConfiguration;
 import de.mxro.serialization.jre.SerializationJre;
@@ -31,7 +31,7 @@ public class TestThatValuesCanBeReadAndWritten {
 		
 		AsyncMapAndorid.assertTable(db, conf);
 		
-		final AsyncMap<String, Object> map = AsyncMapAndorid.createMap(conf,
+		final Store<String, Object> map = AsyncMapAndorid.createMap(conf,
 				SerializationJre.newJavaSerializer(),
 				db);
 

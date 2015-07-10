@@ -9,7 +9,7 @@ import java.io.ByteArrayOutputStream;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
-import de.mxro.async.map.AsyncMap;
+import de.mxro.async.map.Store;
 import de.mxro.async.map.android.AsyncMapAndorid;
 import de.mxro.async.map.android.SQLiteConfiguration;
 import de.mxro.async.map.operations.ClearCacheOperation;
@@ -19,7 +19,7 @@ import de.mxro.serialization.jre.SerializationJre;
 import de.mxro.serialization.jre.StreamDestination;
 import de.mxro.serialization.jre.StreamSource;
 
-public class AndroidAsyncMap<V> implements AsyncMap<String, V> {
+public class AndroidAsyncMap<V> implements Store<String, V> {
 
     private final boolean ENABLE_LOG = false;
 
