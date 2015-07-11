@@ -118,13 +118,12 @@ public class AndroidStoreImpl<V> implements StoreImplementation<String, V> {
     private void executeMultiQueryImmidiately(final String keyStartsWith, final Closure<StoreEntry<String, V>> onEntry,
             final SimpleCallback onCompleted) {
 
-        final Cursor query = db
-                .rawQuery(
-                        "SELECT " + conf.getKeyColumnName() + ", " + conf.getValueColumnName() + " FROM "
-                                + conf.getTableName() + " WHERE " + conf.getKeyColumnName() + " LIKE ?",
-                        new String[] { keyStartsWith });
+        final String sqlQuery = "SELECT " + conf.getKeyColumnName() + ", " + conf.getValueColumnName() + " FROM "
+                + conf.getTableName() + " WHERE " + conf.getKeyColumnName() + " LIKE ?";
 
-        System.out.println(query.getCount());
+        final Cursor query = db.rawQuery(sqlQuery, new String[] { keyStartsWith });
+
+        System.out.println(sqlQuery + " " + query.getCount());
 
         if (query.getCount() == 0) {
             onCompleted.onSuccess();
