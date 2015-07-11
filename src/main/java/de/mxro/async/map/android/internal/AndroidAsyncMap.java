@@ -1,5 +1,6 @@
 package de.mxro.async.map.android.internal;
 
+import delight.async.Value;
 import delight.async.callbacks.SimpleCallback;
 import delight.async.callbacks.ValueCallback;
 import delight.functional.Closure;
@@ -145,6 +146,31 @@ public class AndroidAsyncMap<V> implements StoreImplementation<String, V> {
             final SimpleCallback onCompleted) {
         executeMultiQueryImmidiately(keyStartsWith, onEntry, onCompleted);
 
+    }
+
+    // TODO replace with more efficient implementation using a special SQL
+    // query.
+    @Override
+    public void count(final String keyStartsWith, final ValueCallback<Integer> callback) {
+        final Value<Integer> count = new Value<Integer>(0);
+        getAll(keyStartsWith, new Closure<StoreEntry<String, V>>() {
+
+            @Override
+            public void apply(final StoreEntry<String, V> o) {
+                count.set(count.get() + 1);
+            }
+        }, new SimpleCallback() {
+
+            @Override
+            public void onFailure(final Throwable t) {
+                callback.onFailure(t);
+            }
+
+            @Override
+            public void onSuccess() {
+                callback.onSuccess(count.get());
+            }
+        });
     }
 
     private void executeUpdateOrDeleteStatementImmidiately(final SQLiteStatement statement) {
