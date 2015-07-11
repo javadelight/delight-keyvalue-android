@@ -130,8 +130,6 @@ public class AndroidStoreImpl<V> implements StoreImplementation<String, V> {
             query = db.rawQuery(sqlQuery, null);
         }
 
-        System.out.println(sqlQuery + " " + keyStartsWith + " " + query.getCount());
-
         if (query.getCount() == 0) {
             onCompleted.onSuccess();
             return;
