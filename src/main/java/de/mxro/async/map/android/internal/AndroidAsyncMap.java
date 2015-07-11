@@ -124,10 +124,12 @@ public class AndroidAsyncMap<V> implements StoreImplementation<String, V> {
             return;
         }
 
-        query.moveToFirst();
-        final byte[] data = query.getBlob(1);
+        while (query.moveToNext()) {
+            final byte[] data = query.getBlob(1);
+        }
+
         query.close();
-        return data;
+        onCompleted.onSuccess();
     }
 
     @Override
