@@ -2,6 +2,9 @@ package de.mxro.async.map.android.internal;
 
 import delight.async.callbacks.SimpleCallback;
 import delight.async.callbacks.ValueCallback;
+import delight.keyvalue.Store;
+import delight.keyvalue.internal.operations.ClearCacheOperation;
+import delight.keyvalue.operations.StoreOperation;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -9,11 +12,8 @@ import java.io.ByteArrayOutputStream;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
-import de.mxro.async.map.Store;
 import de.mxro.async.map.android.AsyncMapAndorid;
 import de.mxro.async.map.android.SQLiteConfiguration;
-import de.mxro.async.map.internal.operations.ClearCacheOperation;
-import de.mxro.async.map.operations.StoreOperation;
 import de.mxro.serialization.Serializer;
 import de.mxro.serialization.jre.SerializationJre;
 import de.mxro.serialization.jre.StreamDestination;

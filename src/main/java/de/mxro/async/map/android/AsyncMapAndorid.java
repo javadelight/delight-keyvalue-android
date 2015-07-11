@@ -1,11 +1,11 @@
 package de.mxro.async.map.android;
 
 import delight.functional.Function;
+import delight.keyvalue.Store;
 
 import java.io.File;
 
 import android.database.sqlite.SQLiteDatabase;
-import de.mxro.async.map.Store;
 import de.mxro.async.map.android.internal.AndroidAsyncMap;
 import de.mxro.serialization.Serializer;
 import de.mxro.serialization.jre.StreamDestination;
