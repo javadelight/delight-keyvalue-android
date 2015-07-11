@@ -12,8 +12,15 @@ import delight.functional.Success
 import delight.keyvalue.Store
 import delight.keyvalue.tests.StoreTest
 import org.robolectric.shadows.ShadowSQLiteDatabase
+import delight.keyvalue.tests.StoreTests
 
 class AndroidStorageTests {
+	
+	def static void performAll() {
+		for (StoreTest t: StoreTests.all) {
+			perform(t)
+		}
+	}
 	
 	def static void perform(StoreTest test) {
 		val SQLiteConfiguration conf = AsyncMapAndorid::createDefaultConfiguration()
