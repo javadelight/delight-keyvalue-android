@@ -119,16 +119,16 @@ public class AndroidStoreImpl<V> implements StoreImplementation<String, V> {
             final SimpleCallback onCompleted) {
 
         final String sqlQuery;
-
+        final Cursor query;
         if (!keyStartsWith.equals("")) {
             sqlQuery = "SELECT " + conf.getKeyColumnName() + ", " + conf.getValueColumnName() + " FROM "
                     + conf.getTableName() + " WHERE " + conf.getKeyColumnName() + " LIKE ?";
+            query = db.rawQuery(sqlQuery, new String[] { keyStartsWith });
         } else {
             sqlQuery = "SELECT " + conf.getKeyColumnName() + ", " + conf.getValueColumnName() + " FROM "
                     + conf.getTableName();
+            query = db.rawQuery(sqlQuery, null);
         }
-
-        final Cursor query = db.rawQuery(sqlQuery, new String[] { keyStartsWith });
 
         System.out.println(sqlQuery + " " + keyStartsWith + " " + query.getCount());
 
