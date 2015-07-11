@@ -113,6 +113,30 @@ public class AndroidAsyncMap<V> implements StoreImplementation<String, V> {
         return data;
     }
 
+    private void executeMultiQueryImmidiately(final String keyStartsWith, final Closure<StoreEntry<String, V>> onEntry,
+            final SimpleCallback onCompleted) {
+
+        final Cursor query = db.query(conf.getTableName(),
+                new String[] { conf.getKeyColumnName(), conf.getValueColumnName() }, conf.getKeyColumnName() + "LIKE ?",
+                new String[] { keyStartsWith }, null, null, null);
+        if (query.getCount() == 0) {
+            onCompleted.onSuccess();
+            return;
+        }
+
+        query.moveToFirst();
+        final byte[] data = query.getBlob(1);
+        query.close();
+        return data;
+    }
+
+    @Override
+    public void getAll(final String keyStartsWith, final Closure<StoreEntry<String, V>> onEntry,
+            final SimpleCallback onCompleted) {
+        // TODO Auto-generated method stub
+
+    }
+
     private void executeUpdateOrDeleteStatementImmidiately(final SQLiteStatement statement) {
         db.beginTransaction();
 
@@ -183,13 +207,6 @@ public class AndroidAsyncMap<V> implements StoreImplementation<String, V> {
             return;
         }
         callback.onSuccess();
-    }
-
-    @Override
-    public void getAll(final String keyStartsWith, final Closure<StoreEntry<String, V>> onEntry,
-            final SimpleCallback onCompleted) {
-        // TODO Auto-generated method stub
-
     }
 
     @Override
