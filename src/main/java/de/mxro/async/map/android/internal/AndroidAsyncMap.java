@@ -2,6 +2,8 @@ package de.mxro.async.map.android.internal;
 
 import delight.async.callbacks.SimpleCallback;
 import delight.async.callbacks.ValueCallback;
+import delight.functional.Closure;
+import delight.keyvalue.StoreEntry;
 import delight.keyvalue.StoreImplementation;
 import delight.keyvalue.operations.StoreOperation;
 
@@ -161,6 +163,27 @@ public class AndroidAsyncMap<V> implements StoreImplementation<String, V> {
         statement.bindString(1, key);
 
         return statement;
+    }
+
+    private SQLiteStatement createRemoveAllStatement(final String keyStartsWith) {
+        final String sql = "DELETE FROM " + conf.getTableName() + " WHERE " + conf.getKeyColumnName() + " LIKE ?";
+        final SQLiteStatement statement = db.compileStatement(sql);
+
+        statement.bindString(1, keyStartsWith + "%");
+
+        return statement;
+    }
+
+    @Override
+    public void removeAll(final String keyStartsWith, final SimpleCallback callback) {
+        executeUpdateOrDeleteStatementImmidiately(createRemoveAllStatement(keyStartsWith));
+    }
+
+    @Override
+    public void getAll(final String keyStartsWith, final Closure<StoreEntry<String, V>> onEntry,
+            final SimpleCallback onCompleted) {
+        // TODO Auto-generated method stub
+
     }
 
     @Override
