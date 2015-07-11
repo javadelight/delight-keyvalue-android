@@ -143,7 +143,7 @@ public class AndroidAsyncMap<V> implements StoreImplementation<String, V> {
     @Override
     public void getAll(final String keyStartsWith, final Closure<StoreEntry<String, V>> onEntry,
             final SimpleCallback onCompleted) {
-        // TODO Auto-generated method stub
+        executeMultiQueryImmidiately(keyStartsWith, onEntry, onCompleted);
 
     }
 
