@@ -1,23 +1,25 @@
 package de.mxro.async.map.android.tests
 
+import android.database.sqlite.SQLiteDatabase
+import de.mxro.async.map.android.AsyncMapAndorid
+import de.mxro.async.map.android.SQLiteConfiguration
+import de.mxro.serialization.jre.SerializationJre
 import delight.async.AsyncCommon
 import delight.async.Operation
 import delight.async.callbacks.ValueCallback
 import delight.async.jre.Async
 import delight.functional.Success
 import delight.keyvalue.Store
+import junit.framework.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import org.robolectric.shadows.ShadowSQLiteDatabase
-import android.database.sqlite.SQLiteDatabase
-import de.mxro.async.map.android.AsyncMapAndorid
-import de.mxro.async.map.android.SQLiteConfiguration
-import de.mxro.serialization.jre.SerializationJre
-import junit.framework.Assert
 
-@RunWith(typeof(RobolectricTestRunner)) @Config(manifest=Config::NONE) class TestThatValuesCanBeReadAndWritten {
+@RunWith(typeof(RobolectricTestRunner)) 
+@Config(manifest=Config::NONE) 
+class TestThatValuesCanBeReadAndWritten {
 	@Test def void test() throws Exception {
 		val SQLiteConfiguration conf = AsyncMapAndorid::createDefaultConfiguration()
 		val SQLiteDatabase db = ShadowSQLiteDatabase::create(null)
