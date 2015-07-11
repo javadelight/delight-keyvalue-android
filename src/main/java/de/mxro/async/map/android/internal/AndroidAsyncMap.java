@@ -5,6 +5,7 @@ import delight.async.callbacks.ValueCallback;
 import delight.functional.Closure;
 import delight.keyvalue.StoreEntry;
 import delight.keyvalue.StoreImplementation;
+import delight.keyvalue.internal.v01.StoreEntryData;
 import delight.keyvalue.operations.StoreOperation;
 
 import java.io.ByteArrayInputStream;
@@ -126,6 +127,13 @@ public class AndroidAsyncMap<V> implements StoreImplementation<String, V> {
 
         while (query.moveToNext()) {
             final byte[] data = query.getBlob(1);
+            final String key = query.getString(0);
+
+            final Object object = serializer
+                    .deserialize(SerializationJre.createStreamSource(new ByteArrayInputStream(data)));
+
+            onEntry.apply(new StoreEntryData<String, V>(key, (V) object));
+
         }
 
         query.close();
