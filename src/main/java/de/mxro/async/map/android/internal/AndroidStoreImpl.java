@@ -22,7 +22,7 @@ import de.mxro.serialization.jre.SerializationJre;
 import de.mxro.serialization.jre.StreamDestination;
 import de.mxro.serialization.jre.StreamSource;
 
-public class AndroidAsyncMap<V> implements StoreImplementation<String, V> {
+public class AndroidStoreImpl<V> implements StoreImplementation<String, V> {
 
     private final boolean ENABLE_LOG = false;
 
@@ -277,7 +277,7 @@ public class AndroidAsyncMap<V> implements StoreImplementation<String, V> {
         SQLiteDatabase.releaseMemory();
     }
 
-    public AndroidAsyncMap(final SQLiteConfiguration conf, final Serializer<StreamSource, StreamDestination> serializer,
+    public AndroidStoreImpl(final SQLiteConfiguration conf, final Serializer<StreamSource, StreamDestination> serializer,
             final SQLiteDatabase db) {
         super();
         this.conf = conf;

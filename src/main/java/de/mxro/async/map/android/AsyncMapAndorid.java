@@ -6,7 +6,7 @@ import delight.keyvalue.Store;
 import java.io.File;
 
 import android.database.sqlite.SQLiteDatabase;
-import de.mxro.async.map.android.internal.AndroidAsyncMap;
+import de.mxro.async.map.android.internal.AndroidStoreImpl;
 import de.mxro.serialization.Serializer;
 import de.mxro.serialization.jre.StreamDestination;
 import de.mxro.serialization.jre.StreamSource;
@@ -28,7 +28,7 @@ public class AsyncMapAndorid {
 
     public static <V> Store<String, V> createMap(final SQLiteConfiguration conf,
             final Serializer<StreamSource, StreamDestination> serializer, final SQLiteDatabase injectedDb) {
-        return new AndroidAsyncMap<V>(conf, serializer, injectedDb);
+        return new AndroidStoreImpl<V>(conf, serializer, injectedDb);
     }
 
     public static <V> Store<String, V> createMap(final SQLiteConfiguration conf,
