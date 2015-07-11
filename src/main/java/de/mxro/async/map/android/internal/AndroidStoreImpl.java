@@ -248,7 +248,9 @@ public class AndroidStoreImpl<V> implements StoreImplementation<String, V> {
     @Override
     public void removeAll(final String keyStartsWith, final SimpleCallback callback) {
         try {
-            executeUpdateOrDeleteStatementImmidiately(createRemoveAllStatement(keyStartsWith));
+            createRemoveAllStatement(keyStartsWith).executeUpdateDelete();
+            db.setTransactionSuccessful();
+            db.endTransaction();
         } catch (final Throwable t) {
             callback.onFailure(t);
             return;
