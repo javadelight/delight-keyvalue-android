@@ -12,7 +12,7 @@ import android.database.sqlite.SQLiteStatement;
 import de.mxro.async.map.Store;
 import de.mxro.async.map.android.AsyncMapAndorid;
 import de.mxro.async.map.android.SQLiteConfiguration;
-import de.mxro.async.map.operations.ClearCacheOperation;
+import de.mxro.async.map.internal.operations.ClearCacheOperation;
 import de.mxro.async.map.operations.StoreOperation;
 import de.mxro.serialization.Serializer;
 import de.mxro.serialization.jre.SerializationJre;
