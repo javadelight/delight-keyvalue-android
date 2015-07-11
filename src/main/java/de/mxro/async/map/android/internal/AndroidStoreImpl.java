@@ -123,7 +123,7 @@ public class AndroidStoreImpl<V> implements StoreImplementation<String, V> {
 
         final Cursor query = db.rawQuery(sqlQuery, new String[] { keyStartsWith });
 
-        System.out.println(sqlQuery + " " + query.getCount());
+        System.out.println(sqlQuery + " " + keyStartsWith + " " + query.getCount());
 
         if (query.getCount() == 0) {
             onCompleted.onSuccess();
