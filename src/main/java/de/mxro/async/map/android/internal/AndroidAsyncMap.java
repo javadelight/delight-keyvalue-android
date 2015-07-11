@@ -118,9 +118,12 @@ public class AndroidAsyncMap<V> implements StoreImplementation<String, V> {
     private void executeMultiQueryImmidiately(final String keyStartsWith, final Closure<StoreEntry<String, V>> onEntry,
             final SimpleCallback onCompleted) {
 
-        final Cursor query = db.query(conf.getTableName(),
-                new String[] { conf.getKeyColumnName(), conf.getValueColumnName() }, conf.getKeyColumnName() + "LIKE ?",
-                new String[] { keyStartsWith }, null, null, null);
+        final Cursor query = db
+                .rawQuery(
+                        "SELECT " + conf.getKeyColumnName() + ", " + conf.getValueColumnName() + " FROM "
+                                + conf.getTableName() + " WHERE " + conf.getKeyColumnName() + " LIKE ?",
+                        new String[] { keyStartsWith });
+
         if (query.getCount() == 0) {
             onCompleted.onSuccess();
             return;
