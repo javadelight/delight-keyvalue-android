@@ -19,11 +19,9 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowSQLiteDatabase;
 
-@RunWith(RobolectricTestRunner.class)/* 
-@Config(manifest = Config.class./* name is null */) */
+@RunWith(RobolectricTestRunner.class)
 @SuppressWarnings("all")
 public class TestThatValuesCanBeReadAndWritten {
   @Test

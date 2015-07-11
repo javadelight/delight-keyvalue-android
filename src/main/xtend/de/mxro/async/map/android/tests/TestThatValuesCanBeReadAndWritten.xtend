@@ -19,9 +19,10 @@ import org.robolectric.shadows.ShadowSQLiteDatabase
 
 
 @RunWith(typeof(RobolectricTestRunner)) 
-@Config(manifest=Config::NONE) 
 class TestThatValuesCanBeReadAndWritten {
-	@Test def void test() throws Exception {
+	@Test 
+	def void test() throws Exception {
+		
 		val SQLiteConfiguration conf = AsyncMapAndorid::createDefaultConfiguration()
 		val SQLiteDatabase db = ShadowSQLiteDatabase::create(null)
 		AsyncMapAndorid::assertTable(db, conf)
