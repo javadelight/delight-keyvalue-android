@@ -13,7 +13,7 @@ import de.mxro.async.map.Store;
 import de.mxro.async.map.android.AsyncMapAndorid;
 import de.mxro.async.map.android.SQLiteConfiguration;
 import de.mxro.async.map.operations.ClearCacheOperation;
-import de.mxro.async.map.operations.MapOperation;
+import de.mxro.async.map.operations.StoreOperation;
 import de.mxro.serialization.Serializer;
 import de.mxro.serialization.jre.SerializationJre;
 import de.mxro.serialization.jre.StreamDestination;
@@ -184,7 +184,7 @@ public class AndroidAsyncMap<V> implements Store<String, V> {
     }
 
     @Override
-    public void performOperation(final MapOperation operation) {
+    public void performOperation(final StoreOperation operation) {
         if (operation instanceof ClearCacheOperation) {
             SQLiteDatabase.releaseMemory();
         }
