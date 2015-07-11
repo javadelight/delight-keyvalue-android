@@ -3,6 +3,7 @@ package de.mxro.async.map.android.internal;
 import delight.async.callbacks.SimpleCallback;
 import delight.async.callbacks.ValueCallback;
 import delight.keyvalue.StoreImplementation;
+import delight.keyvalue.operations.StoreOperation;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -179,6 +180,11 @@ public class AndroidAsyncMap<V> implements StoreImplementation<String, V> {
     @Override
     public void commit(final SimpleCallback callback) {
         callback.onSuccess();
+    }
+
+    @Override
+    public void performOperation(final StoreOperation<String, V> operation, final ValueCallback<Object> callback) {
+        operation.applyOn(this, callback);
     }
 
     @Override
