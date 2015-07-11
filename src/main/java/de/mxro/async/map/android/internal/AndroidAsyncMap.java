@@ -176,7 +176,13 @@ public class AndroidAsyncMap<V> implements StoreImplementation<String, V> {
 
     @Override
     public void removeAll(final String keyStartsWith, final SimpleCallback callback) {
-        executeUpdateOrDeleteStatementImmidiately(createRemoveAllStatement(keyStartsWith));
+        try {
+            executeUpdateOrDeleteStatementImmidiately(createRemoveAllStatement(keyStartsWith));
+        } catch (final Throwable t) {
+            callback.onFailure(t);
+            return;
+        }
+        callback.onSuccess();
     }
 
     @Override
