@@ -124,6 +124,8 @@ public class AndroidStoreImpl<V> implements StoreImplementation<String, V> {
                                 + conf.getTableName() + " WHERE " + conf.getKeyColumnName() + " LIKE ?",
                         new String[] { keyStartsWith });
 
+        System.out.println(query.getCount());
+
         if (query.getCount() == 0) {
             onCompleted.onSuccess();
             return;
@@ -277,8 +279,8 @@ public class AndroidStoreImpl<V> implements StoreImplementation<String, V> {
         SQLiteDatabase.releaseMemory();
     }
 
-    public AndroidStoreImpl(final SQLiteConfiguration conf, final Serializer<StreamSource, StreamDestination> serializer,
-            final SQLiteDatabase db) {
+    public AndroidStoreImpl(final SQLiteConfiguration conf,
+            final Serializer<StreamSource, StreamDestination> serializer, final SQLiteDatabase db) {
         super();
         this.conf = conf;
         this.serializer = serializer;
