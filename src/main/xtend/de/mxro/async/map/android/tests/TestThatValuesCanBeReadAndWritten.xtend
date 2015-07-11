@@ -17,6 +17,7 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import org.robolectric.shadows.ShadowSQLiteDatabase
 
+
 @RunWith(typeof(RobolectricTestRunner)) 
 @Config(manifest=Config::NONE) 
 class TestThatValuesCanBeReadAndWritten {
