@@ -123,7 +123,7 @@ public class AndroidStoreImpl<V> implements StoreImplementation<String, V> {
         if (!keyStartsWith.equals("")) {
             sqlQuery = "SELECT " + conf.getKeyColumnName() + ", " + conf.getValueColumnName() + " FROM "
                     + conf.getTableName() + " WHERE " + conf.getKeyColumnName() + " LIKE ?";
-            query = db.rawQuery(sqlQuery, new String[] { keyStartsWith });
+            query = db.rawQuery(sqlQuery, new String[] { keyStartsWith + "%" });
         } else {
             sqlQuery = "SELECT " + conf.getKeyColumnName() + ", " + conf.getValueColumnName() + " FROM "
                     + conf.getTableName();
@@ -248,6 +248,7 @@ public class AndroidStoreImpl<V> implements StoreImplementation<String, V> {
     @Override
     public void removeAll(final String keyStartsWith, final SimpleCallback callback) {
         try {
+            db.beginTransaction();
             createRemoveAllStatement(keyStartsWith).executeUpdateDelete();
             db.setTransactionSuccessful();
             db.endTransaction();
