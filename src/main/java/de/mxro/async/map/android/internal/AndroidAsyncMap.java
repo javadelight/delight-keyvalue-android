@@ -2,9 +2,7 @@ package de.mxro.async.map.android.internal;
 
 import delight.async.callbacks.SimpleCallback;
 import delight.async.callbacks.ValueCallback;
-import delight.keyvalue.Store;
-import delight.keyvalue.internal.operations.ClearCacheOperation;
-import delight.keyvalue.operations.StoreOperation;
+import delight.keyvalue.StoreImplementation;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -19,7 +17,7 @@ import de.mxro.serialization.jre.SerializationJre;
 import de.mxro.serialization.jre.StreamDestination;
 import de.mxro.serialization.jre.StreamSource;
 
-public class AndroidAsyncMap<V> implements Store<String, V> {
+public class AndroidAsyncMap<V> implements StoreImplementation<String, V> {
 
     private final boolean ENABLE_LOG = false;
 
@@ -66,8 +64,8 @@ public class AndroidAsyncMap<V> implements Store<String, V> {
             return null;
         }
 
-        final Object object = serializer.deserialize(SerializationJre
-                .createStreamSource(new ByteArrayInputStream(data)));
+        final Object object = serializer
+                .deserialize(SerializationJre.createStreamSource(new ByteArrayInputStream(data)));
 
         if (ENABLE_LOG) {
             System.out.println(this + ": getSync " + key + " retrieved " + object);
@@ -184,14 +182,12 @@ public class AndroidAsyncMap<V> implements Store<String, V> {
     }
 
     @Override
-    public void performOperation(final StoreOperation operation) {
-        if (operation instanceof ClearCacheOperation) {
-            SQLiteDatabase.releaseMemory();
-        }
+    public void clearCache() {
+        SQLiteDatabase.releaseMemory();
     }
 
-    public AndroidAsyncMap(final SQLiteConfiguration conf,
-            final Serializer<StreamSource, StreamDestination> serializer, final SQLiteDatabase db) {
+    public AndroidAsyncMap(final SQLiteConfiguration conf, final Serializer<StreamSource, StreamDestination> serializer,
+            final SQLiteDatabase db) {
         super();
         this.conf = conf;
         this.serializer = serializer;
