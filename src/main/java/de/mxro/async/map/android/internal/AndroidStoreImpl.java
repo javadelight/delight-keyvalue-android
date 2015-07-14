@@ -11,6 +11,8 @@ import delight.keyvalue.operations.StoreOperation;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -255,6 +257,17 @@ public class AndroidStoreImpl<V> implements StoreImplementation<String, V> {
             return;
         }
         callback.onSuccess();
+    }
+
+    @Override
+    public void get(final List<String> keys, final ValueCallback<List<V>> callback) {
+        final List<V> results = new ArrayList<V>(keys.size());
+
+        for (final String key : keys) {
+            results.add(getSync(key));
+        }
+
+        callback.onSuccess(results);
     }
 
     @Override
