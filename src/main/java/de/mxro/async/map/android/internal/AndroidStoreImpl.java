@@ -130,9 +130,15 @@ public class AndroidStoreImpl<V> implements StoreImplementation<String, V> {
 
         final String sqlQuery;
         final Cursor query;
+
+        int saveToIdx = toIdx;
+        if (saveToIdx == -1) {
+            saveToIdx = 100000;
+        }
+
         if (!keyStartsWith.equals("")) {
             sqlQuery = "SELECT " + conf.getKeyColumnName() + ", " + conf.getValueColumnName() + " FROM "
-                    + conf.getTableName() + " WHERE " + conf.getKeyColumnName() + " LIKE ?";
+                    + conf.getTableName() + " WHERE " + conf.getKeyColumnName() + " LIKE ? LIMIT ? OFFSET ?";
             query = db.rawQuery(sqlQuery, new String[] { keyStartsWith + "%" });
         } else {
             sqlQuery = "SELECT " + conf.getKeyColumnName() + ", " + conf.getValueColumnName() + " FROM "
