@@ -131,19 +131,20 @@ public class AndroidStoreImpl<V> implements StoreImplementation<String, V> {
         final String sqlQuery;
         final Cursor query;
 
-        int saveToIdx = toIdx;
-        if (saveToIdx == -1) {
-            saveToIdx = 100000;
+        int offset = toIdx;
+        if (offset == -1) {
+            offset = 100000;
         }
+        final int limit = (offset - fromIdx + 1);
 
         if (!keyStartsWith.equals("")) {
             sqlQuery = "SELECT " + conf.getKeyColumnName() + ", " + conf.getValueColumnName() + " FROM "
                     + conf.getTableName() + " WHERE " + conf.getKeyColumnName() + " LIKE ? LIMIT ? OFFSET ?";
-            query = db.rawQuery(sqlQuery, new String[] { keyStartsWith + "%", fromIdx + "", toIdx + "" });
+            query = db.rawQuery(sqlQuery, new String[] { keyStartsWith + "%", limit + "", offset + "" });
         } else {
             sqlQuery = "SELECT " + conf.getKeyColumnName() + ", " + conf.getValueColumnName() + " FROM "
-                    + conf.getTableName();
-            query = db.rawQuery(sqlQuery, null);
+                    + conf.getTableName() + " LIMIT ? OFFSET ?";
+            query = db.rawQuery(sqlQuery, new String[] { limit + "", offset + "" });
         }
 
         if (query.getCount() == 0) {
