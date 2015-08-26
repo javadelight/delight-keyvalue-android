@@ -139,7 +139,7 @@ public class AndroidStoreImpl<V> implements StoreImplementation<String, V> {
         if (!keyStartsWith.equals("")) {
             sqlQuery = "SELECT " + conf.getKeyColumnName() + ", " + conf.getValueColumnName() + " FROM "
                     + conf.getTableName() + " WHERE " + conf.getKeyColumnName() + " LIKE ? LIMIT ? OFFSET ?";
-            query = db.rawQuery(sqlQuery, new String[] { keyStartsWith + "%" });
+            query = db.rawQuery(sqlQuery, new String[] { keyStartsWith + "%", fromIdx + "", toIdx + "" });
         } else {
             sqlQuery = "SELECT " + conf.getKeyColumnName() + ", " + conf.getValueColumnName() + " FROM "
                     + conf.getTableName();
