@@ -117,8 +117,21 @@ public class AndroidStoreImpl<V> implements StoreImplementation<String, V> {
         return data;
     }
 
-    private void executeMultiQueryImmidiately(final String keyStartsWith, final Closure<StoreEntry<String, V>> onEntry,
+    @Override
+    public void getAll(final String keyStartsWith, final Closure<StoreEntry<String, V>> onEntry,
             final SimpleCallback onCompleted) {
+        executeMultiQueryImmidiately(keyStartsWith, onEntry, onCompleted);
+
+    }
+
+    @Override
+    public void getAll(final String keyStartsWith, final int fromIdx, final int toIdx,
+            final ValueCallback<List<StoreEntry<String, V>>> callback) {
+        executeMultiQueryImmidiately(keyStartsWith, fromIdx, toIdx, callback);
+    }
+
+    private void executeMultiQueryImmidiately(final String keyStartsWith, final int fromIdx, final int toIdx,
+            final ValueCallback<List<StoreEntry<String, V>>> callback) {
 
         final String sqlQuery;
         final Cursor query;
@@ -150,13 +163,6 @@ public class AndroidStoreImpl<V> implements StoreImplementation<String, V> {
 
         query.close();
         onCompleted.onSuccess();
-    }
-
-    @Override
-    public void getAll(final String keyStartsWith, final Closure<StoreEntry<String, V>> onEntry,
-            final SimpleCallback onCompleted) {
-        executeMultiQueryImmidiately(keyStartsWith, onEntry, onCompleted);
-
     }
 
     // TODO replace with more efficient implementation using a special SQL
