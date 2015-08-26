@@ -118,13 +118,6 @@ public class AndroidStoreImpl<V> implements StoreImplementation<String, V> {
     }
 
     @Override
-    public void getAll(final String keyStartsWith, final Closure<StoreEntry<String, V>> onEntry,
-            final SimpleCallback onCompleted) {
-        executeMultiQueryImmidiately(keyStartsWith, onEntry, onCompleted);
-
-    }
-
-    @Override
     public void getAll(final String keyStartsWith, final int fromIdx, final int toIdx,
             final ValueCallback<List<StoreEntry<String, V>>> callback) {
         executeMultiQueryImmidiately(keyStartsWith, fromIdx, toIdx, callback);
@@ -132,6 +125,8 @@ public class AndroidStoreImpl<V> implements StoreImplementation<String, V> {
 
     private void executeMultiQueryImmidiately(final String keyStartsWith, final int fromIdx, final int toIdx,
             final ValueCallback<List<StoreEntry<String, V>>> callback) {
+
+        final List<StoreEntry<String, V>> results = new ArrayList<StoreEntry<String, V>>();
 
         final String sqlQuery;
         final Cursor query;
@@ -146,7 +141,7 @@ public class AndroidStoreImpl<V> implements StoreImplementation<String, V> {
         }
 
         if (query.getCount() == 0) {
-            onCompleted.onSuccess();
+            callback.onSuccess(results);
             return;
         }
 
@@ -157,12 +152,13 @@ public class AndroidStoreImpl<V> implements StoreImplementation<String, V> {
             final Object object = serializer
                     .deserialize(SerializationJre.createStreamSource(new ByteArrayInputStream(data)));
 
-            onEntry.apply(new StoreEntryData<String, V>(key, (V) object));
+            results.add(new StoreEntryData<String, V>(key, (V) object));
 
         }
 
         query.close();
-        onCompleted.onSuccess();
+
+        callback.onSuccess(results);
     }
 
     // TODO replace with more efficient implementation using a special SQL
