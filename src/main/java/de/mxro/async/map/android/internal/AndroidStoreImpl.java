@@ -1,6 +1,6 @@
 package de.mxro.async.map.android.internal;
 
-import delight.async.Value;
+import delight.async.AsyncCommon;
 import delight.async.callbacks.SimpleCallback;
 import delight.async.callbacks.ValueCallback;
 import delight.functional.Closure;
@@ -172,25 +172,14 @@ public class AndroidStoreImpl<V> implements StoreImplementation<String, V> {
     // query.
     @Override
     public void count(final String keyStartsWith, final ValueCallback<Integer> callback) {
-        final Value<Integer> count = new Value<Integer>(0);
-        getAll(keyStartsWith, new Closure<StoreEntry<String, V>>() {
+        getAll(keyStartsWith, 0, -1, AsyncCommon.embed(callback, new Closure<List<StoreEntry<String, V>>>() {
 
             @Override
-            public void apply(final StoreEntry<String, V> o) {
-                count.set(count.get() + 1);
+            public void apply(final List<StoreEntry<String, V>> o) {
+                callback.onSuccess(o.size());
             }
-        }, new SimpleCallback() {
+        }));
 
-            @Override
-            public void onFailure(final Throwable t) {
-                callback.onFailure(t);
-            }
-
-            @Override
-            public void onSuccess() {
-                callback.onSuccess(count.get());
-            }
-        });
     }
 
     private void executeUpdateOrDeleteStatementImmidiately(final SQLiteStatement statement) {
