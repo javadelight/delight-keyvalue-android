@@ -40,7 +40,7 @@ public class TestThatValuesCanBeReadAndWritten {
     };
     Async.<Success>waitFor(
       ((Operation<Success>) new Operation<Success>() {
-          public void apply(ValueCallback<Success> null) {
+          public void apply(ValueCallback<Success> callback) {
             _function.apply(callback);
           }
       }));
