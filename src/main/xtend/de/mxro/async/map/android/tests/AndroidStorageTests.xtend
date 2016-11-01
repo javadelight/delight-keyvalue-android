@@ -15,7 +15,7 @@ import org.robolectric.shadows.ShadowSQLiteDatabase
 import delight.keyvalue.tests.StoreTests
 
 class AndroidStorageTests {
-	
+
 	def static void performAll() {
 		for (StoreTest t: StoreTests.all) {
 			perform(t)
