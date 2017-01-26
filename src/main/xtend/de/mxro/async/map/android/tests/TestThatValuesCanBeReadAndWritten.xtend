@@ -16,7 +16,6 @@ import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.shadows.ShadowSQLiteDatabase
 
-
 @RunWith(typeof(RobolectricTestRunner)) 
 class TestThatValuesCanBeReadAndWritten {
 	

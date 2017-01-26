@@ -38,7 +38,7 @@ public class AndroidStorageTests {
     final Procedure1<ValueCallback<Success>> _function = new Procedure1<ValueCallback<Success>>() {
       @Override
       public void apply(final ValueCallback<Success> callback) {
-        SimpleCallback _asSimpleCallback = AsyncCommon.asSimpleCallback(callback);
+        SimpleCallback _asSimpleCallback = AsyncCommon.<Success>asSimpleCallback(callback);
         map.start(_asSimpleCallback);
       }
     };
@@ -52,7 +52,7 @@ public class AndroidStorageTests {
     final Procedure1<ValueCallback<Success>> _function_1 = new Procedure1<ValueCallback<Success>>() {
       @Override
       public void apply(final ValueCallback<Success> callback) {
-        SimpleCallback _asSimpleCallback = AsyncCommon.asSimpleCallback(callback);
+        SimpleCallback _asSimpleCallback = AsyncCommon.<Success>asSimpleCallback(callback);
         map.stop(_asSimpleCallback);
         db.close();
       }
