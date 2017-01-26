@@ -123,6 +123,26 @@ public class AndroidStoreImpl<V> implements StoreImplementation<String, V> {
         executeMultiQueryImmidiately(keyStartsWith, fromIdx, toIdx, callback);
     }
 
+    @Override
+    public void getSize(final String keyStartsWith, final ValueCallback<Integer> callback) {
+        getAll(keyStartsWith, 0, -1, AsyncCommon.embed(callback, new Closure<List<StoreEntry<String, V>>>() {
+
+            @Override
+            public void apply(final List<StoreEntry<String, V>> entries) {
+
+                int size = 0;
+                for (final StoreEntry<String, V> e : entries) {
+                    size += size + e.key().toString().length();
+                    size += size + e.value().toString().length();
+                }
+
+                callback.onSuccess(size);
+
+            }
+
+        }));
+    }
+
     private void executeMultiQueryImmidiately(final String keyStartsWith, final int fromIdx, final int toIdx,
             final ValueCallback<List<StoreEntry<String, V>>> callback) {
 
