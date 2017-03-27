@@ -34,8 +34,8 @@ public class TestThatValuesCanBeReadAndWritten {
     };
     Async.<Success>waitFor(
       ((Operation<Success>) new Operation<Success>() {
-          public void apply(ValueCallback<Success> callback) {
-            _function.apply(callback);
+          public void apply(ValueCallback<Success> null) {
+            _function.apply(null);
           }
       }));
     map.putSync("one", Integer.valueOf(1));
