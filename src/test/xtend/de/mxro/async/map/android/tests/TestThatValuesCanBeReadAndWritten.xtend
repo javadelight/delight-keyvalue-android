@@ -19,6 +19,7 @@ import org.robolectric.shadows.ShadowSQLiteDatabase
 @RunWith(typeof(RobolectricTestRunner)) 
 class TestThatValuesCanBeReadAndWritten {
 	
+	
 	@Test 
 	def void test() throws Exception {
 		
