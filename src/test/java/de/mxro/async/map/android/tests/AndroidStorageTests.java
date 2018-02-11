@@ -38,8 +38,8 @@ public class AndroidStorageTests {
     };
     Async.<Success>waitFor(
       ((Operation<Success>) new Operation<Success>() {
-          public void apply(ValueCallback<Success> callback) {
-            _function.apply(callback);
+          public void apply(ValueCallback<Success> null) {
+            _function.apply(null);
           }
       }));
     test.test(map);
@@ -52,8 +52,8 @@ public class AndroidStorageTests {
     };
     Async.<Success>waitFor(
       ((Operation<Success>) new Operation<Success>() {
-          public void apply(ValueCallback<Success> callback) {
-            _function_1.apply(callback);
+          public void apply(ValueCallback<Success> null) {
+            _function_1.apply(null);
           }
       }));
   }
